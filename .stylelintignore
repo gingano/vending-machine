@@ -1,0 +1,9 @@
+/public
+/build
+/.cache
+/.vscode
+/node_modules
+/*.json
+/src/components
+/static
+/content
