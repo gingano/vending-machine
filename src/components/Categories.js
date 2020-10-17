@@ -24,6 +24,9 @@ const Categories = () => {
               </li>
             ))}
           </ul>
+          <h2 className="categories__category-price">
+            {`Price: £${category.price.toFixed(2)}`}
+          </h2>
         </li>
       ))}
     </ul>
