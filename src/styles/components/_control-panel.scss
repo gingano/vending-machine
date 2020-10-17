@@ -106,6 +106,7 @@
     margin-top: 20px;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
   }
 
@@ -115,5 +116,6 @@
     font-size: 20px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 20px;
   }
 }
