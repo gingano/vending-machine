@@ -1,0 +1,11 @@
+@mixin width-md {
+  @media (min-width: $breakpoint-md) { @content; }
+}
+
+@mixin width-lg {
+  @media (min-width: $breakpoint-lg) { @content; }
+}
+
+@mixin width-xl {
+  @media (min-width: $breakpoint-xl) { @content; }
+}
