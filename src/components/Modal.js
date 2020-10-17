@@ -16,7 +16,9 @@ const Modal = ({ children }) => {
 
   return createPortal(
     <div className="modal-container">
-      <div className="modal">{children}</div>
+      <div className="container">
+        <div className="modal">{children}</div>
+      </div>
     </div>,
     element
   )

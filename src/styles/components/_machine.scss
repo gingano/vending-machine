@@ -1,0 +1,10 @@
+.machine {
+  background: $color-green;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+
+  &__reset-button {
+    display: none;
+  }
+}

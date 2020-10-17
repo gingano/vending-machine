@@ -11,7 +11,17 @@ $color-light-gray: #fafafa;
 $color-light-red: #ce2900;
 $color-red: #a02000;
 
+$color-background-dark:#331e1e;
+$color-background-deep-dark:#1f1212;
+
+$color-background-yellow:#cae943;
+
+$color-background-metal:rgb(165, 160, 179);
+
+$color-background-display:#60974a;
+
 $font-family-roboto: 'Roboto', sans-serif;
+$font-family-digital: 'DS-Digital', sans-serif;
 
 $breakpoint-md: 768px;
 $breakpoint-lg: 1000px;
@@ -44,3 +54,10 @@ $body-2-font-size-xl: 18px;
 $body-2-line-height: 16px;
 $body-2-line-height-md: 18px;
 $body-2-line-height-xl: 18px;
+
+$display-font-size: 18px;
+$display-font-size-md: 14px;
+$display-font-size-xl: 18px;
+$display-line-height: 18px;
+$display-line-height-md: 18px;
+$display-line-height-xl: 18px;

@@ -32,10 +32,6 @@ const Money = () => {
           type="button"
           className={`money__button  money__button--${
             denomination < 1 && 'small'
-          } money__button--${
-            (productsState.totalPrice === 0 ||
-              productsState.introduced >= productsState.totalPrice) &&
-            'disabled'
           }`}
         >
           {`${denomination >= 1 ? '£' : ''}${

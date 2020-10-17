@@ -1,0 +1,104 @@
+.control-panel {
+  background:
+    linear-gradient(90deg, $color-background-metal (22px - 1px), transparent 1%) center,
+    linear-gradient($color-background-metal (22px - 1px), transparent 1%) center,
+    rgb(230, 225, 245);
+  background-size: 22px 22px;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 10px;
+  box-sizing: border-box;
+
+  &__display {
+    @extend %display;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 10px;
+    background: $color-background-display;
+    border-radius: 10px;
+    height: 150px;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(122deg, rgba(229, 250, 255, 0.1) 0%, rgba(215, 242, 255, 0.2) 49%, rgba(198, 230, 255, 0.2) 51%, rgba(174, 241, 255, 0.1) 100%);
+    }
+  }
+
+  &__display-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__display-title {
+    line-height: 25px;
+    margin: 0;
+  }
+
+  &__display-total {
+    margin-bottom: 0;
+  }
+
+  &__categories {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  &__category {
+    @extend %title-2;
+
+    width: 48%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__category-buttons {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  &__category-button {
+    @extend %button;
+  }
+
+  &__button-text {
+    display: block;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+  }
+
+  &__control-buttons {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__control-button {
+    @extend %button;
+
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

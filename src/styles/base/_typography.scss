@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'DS-Digital';
+  src: url('../../fonts/DS-DIGI.TTF')  format('truetype');
+}
+
 %title-1, %title-2 {
   font-family: $font-family-roboto;
   font-style: normal;
@@ -74,5 +79,24 @@
   @include width-xl {
     font-size: $body-2-font-size-xl;
     line-height: $body-2-line-height-xl;
+  }
+}
+
+%display {
+  font-family: $font-family-digital;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  color: $font-dark;
+  font-size: $display-font-size;
+  line-height: $display-line-height;
+
+  @include width-md {
+    font-size: $display-font-size-md;
+    line-height: $display-line-height-md;
+  }
+
+  @include width-xl {
+    font-size: $display-font-size-xl;
+    line-height: $display-line-height-xl;
   }
 }

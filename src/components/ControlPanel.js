@@ -59,19 +59,21 @@ const ControlPanel = () => {
           <h2 className="control-panel__display-title">Insert money please</h2>
         )}
         <p className="control-panel__display-total">
-          Total:
-          {productsState.totalPrice !== 0
-            ? productsState.totalPrice.toFixed(2)
-            : totalPrice.toFixed(2)}
+          {`Total: 
+          ${
+            productsState.totalPrice !== 0
+              ? productsState.totalPrice.toFixed(2)
+              : totalPrice.toFixed(2)
+          }`}
         </p>
         {productsState.totalPrice !== 0 && (
           <p className="control-panel__display-total">
-            Introduced:
-            {productsState.introduced.toFixed(2)}
+            {`Introduced: 
+            ${productsState.introduced.toFixed(2)}`}
           </p>
         )}
       </div>
-      <ul className="control-panel__cetegories">
+      <ul className="control-panel__categories">
         {productsState.products.map((category) => (
           <li
             key={`control-panel-${category.id}`}
@@ -86,13 +88,9 @@ const ControlPanel = () => {
                 }
                 onClick={() => minusProduct(category.name)}
                 type="button"
-                className={`control-panel__category-button control-panel__category-button--${
-                  (displayState[category.name] === 0 ||
-                    productsState.totalPrice !== 0) &&
-                  'disabled'
-                }`}
+                className="control-panel__category-button"
               >
-                -
+                <span className="control-panel__button-text">-</span>
               </button>
               <button
                 disabled={
@@ -101,45 +99,38 @@ const ControlPanel = () => {
                 }
                 onClick={() => plusProduct(category.name)}
                 type="button"
-                className={`control-panel__category-button control-panel__category-button--${
-                  (displayState[category.name] === category.itemsCount ||
-                    productsState.totalPrice !== 0) &&
-                  'disabled'
-                }`}
+                className="control-panel__category-button"
               >
-                +
+                <span className="control-panel__button-text">+</span>
               </button>
             </div>
           </li>
         ))}
       </ul>
-      <button
-        disabled={productsState.totalPrice !== 0}
-        onClick={() => {
-          acceptOrder()
-        }}
-        type="button"
-        className={`control-panel__accept-button control-panel__accept-button--${
-          productsState.totalPrice !== 0 && 'disabled'
-        }`}
-      >
-        Accept
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 || productsState.introduced !== 0
-        }
-        onClick={() => {
-          dispatch(setTotal({}, 0))
-        }}
-        type="button"
-        className={`control-panel__cancel-button control-panel__cancel-button--${
-          (productsState.totalPrice === 0 || productsState.introduced !== 0) &&
-          'disabled'
-        }`}
-      >
-        Cancel
-      </button>
+      <div className="control-panel__control-buttons">
+        <button
+          disabled={productsState.totalPrice !== 0}
+          onClick={() => {
+            acceptOrder()
+          }}
+          type="button"
+          className="control-panel__control-button"
+        >
+          <span className="control-panel__button-text">Accept</span>
+        </button>
+        <button
+          disabled={
+            productsState.totalPrice === 0 || productsState.introduced !== 0
+          }
+          onClick={() => {
+            dispatch(setTotal({}, 0))
+          }}
+          type="button"
+          className="control-panel__control-button"
+        >
+          <span className="control-panel__button-text">Cancel</span>
+        </button>
+      </div>
     </div>
   )
 }
