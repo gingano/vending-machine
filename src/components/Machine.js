@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setProducts,
-  setTotal,
-  setIntroduced,
   resetProducts,
+  resetHelpers,
 } from '../redux/actions/products'
+import useResult from '../hooks/useResult'
 import Categories from './Categories'
 import ControlPanel from './ControlPanel'
 import Modal from './Modal'
@@ -17,57 +17,17 @@ const Machine = () => {
   const dispatch = useDispatch()
 
   const closeModal = () => {
-    dispatch(setTotal({}, 0))
-    dispatch(setIntroduced(0))
+    dispatch(resetHelpers())
     setModalIsOpened(false)
   }
 
-  const countChange = (denominations, totalPrice, introduced) => {
-    let change = introduced - totalPrice
-    change = parseFloat(change.toFixed(2))
-    const denominationsCount = {}
-
-    denominations.forEach((denomination) => {
-      const integerDivision = Math.floor(change / denomination)
-      if (integerDivision > 0) {
-        denominationsCount[denomination] = integerDivision
-        change = parseFloat(
-          (change - denomination * integerDivision).toFixed(2)
-        )
-      }
-    })
-
-    return denominationsCount
-  }
-
-  useEffect(() => {
-    if (
-      productsState.totalPrice !== 0 &&
-      productsState.introduced !== 0 &&
-      productsState.totalPrice <= productsState.introduced
-    ) {
-      const processedProducts = productsState.products.map((product) => {
-        const currentProduct = { ...product }
-
-        currentProduct.itemsCount -= productsState.totalItems[product.name]
-
-        return currentProduct
-      })
-
-      dispatch(setProducts(processedProducts))
-
-      const denominations = [2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
-
-      setCurrentChange(
-        countChange(
-          denominations,
-          productsState.totalPrice,
-          productsState.introduced
-        )
-      )
-      setModalIsOpened(true)
-    }
-  }, [productsState.totalPrice, productsState.introduced])
+  useResult(
+    dispatch,
+    productsState,
+    setProducts,
+    setCurrentChange,
+    setModalIsOpened
+  )
 
   return (
     <div className="machine">

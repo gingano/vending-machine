@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setIntroduced } from '../redux/actions/products'
+import useIntroducedAccumulator from '../hooks/useIntroducedAccumulator'
 
 const Money = () => {
+  const denominations = [2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
   const [introducedAccumulator, setIntroducedAccumulator] = useState(0)
 
   const productsState = useSelector(({ products }) => products)
@@ -14,108 +16,33 @@ const Money = () => {
     )
   }
 
-  useEffect(() => {
-    dispatch(setIntroduced(parseFloat(introducedAccumulator.toFixed(2))))
-  }, [introducedAccumulator])
+  useIntroducedAccumulator(dispatch, introducedAccumulator, setIntroduced)
 
   return (
     <div className="money">
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={2}
-        type="button"
-        className="money__button"
-      >
-        £2
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={1}
-        type="button"
-        className="money__button"
-      >
-        £1
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={0.5}
-        type="button"
-        className="money__button  money__button--small"
-      >
-        50
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={0.2}
-        type="button"
-        className="money__button  money__button--small"
-      >
-        20
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={0.1}
-        type="button"
-        className="money__button  money__button--small"
-      >
-        10
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={0.05}
-        type="button"
-        className="money__button  money__button--small"
-      >
-        5
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={0.02}
-        type="button"
-        className="money__button  money__button--small"
-      >
-        2
-      </button>
-      <button
-        disabled={
-          productsState.totalPrice === 0 ||
-          productsState.introduced >= productsState.totalPrice
-        }
-        onClick={insertMoney}
-        value={0.01}
-        type="button"
-        className="money__button  money__button--small"
-      >
-        1
-      </button>
+      {denominations.map((denomination) => (
+        <button
+          key={`money-${denomination}`}
+          disabled={
+            productsState.totalPrice === 0 ||
+            productsState.introduced >= productsState.totalPrice
+          }
+          onClick={insertMoney}
+          value={denomination}
+          type="button"
+          className={`money__button  money__button--${
+            denomination < 1 && 'small'
+          } money__button--${
+            (productsState.totalPrice === 0 ||
+              productsState.introduced >= productsState.totalPrice) &&
+            'disabled'
+          }`}
+        >
+          {`${denomination >= 1 ? '£' : ''}${
+            denomination >= 1 ? denomination : denomination * 100
+          }`}
+        </button>
+      ))}
     </div>
   )
 }

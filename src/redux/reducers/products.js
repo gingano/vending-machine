@@ -68,6 +68,14 @@ export default (state = initialState, action) => {
         products: [...initialState.products],
       }
 
+    case 'RESET_HELPERS':
+      return {
+        ...state,
+        totalItems: { ...initialState.totalItems },
+        totalPrice: initialState.totalPrice,
+        introduced: initialState.introduced,
+      }
+
     default:
       return state
   }

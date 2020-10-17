@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setTotal } from '../redux/actions/products'
+import { countTotalPrice } from '../utils/helpers'
+import useDisplayState from '../hooks/useDisplayState'
 
 const ControlPanel = () => {
   const [displayState, setDisplayState] = useState({})
@@ -8,33 +10,14 @@ const ControlPanel = () => {
   const productsState = useSelector(({ products }) => products)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const currentDisplayState = {}
-    productsState.products.forEach((category) => {
-      currentDisplayState[category.name] = 0
-    })
-
-    setDisplayState(currentDisplayState)
-  }, [])
-
-  const countTotalPrice = (currentDisplayState) => {
-    let total = 0
-
-    Object.keys(currentDisplayState).forEach((key) => {
-      total +=
-        currentDisplayState[key] *
-        productsState.products.find((product) => product.name === key).price
-    })
-
-    return parseFloat(total.toFixed(2))
-  }
+  useDisplayState(productsState, setDisplayState)
 
   const plusProduct = (name) => {
     const currentDisplayState = { ...displayState }
 
     currentDisplayState[name]++
 
-    setCurrentTotalPrice(countTotalPrice(currentDisplayState))
+    setCurrentTotalPrice(countTotalPrice(currentDisplayState, productsState))
     setDisplayState(currentDisplayState)
   }
 
@@ -43,7 +26,7 @@ const ControlPanel = () => {
 
     currentDisplayState[name]--
 
-    setCurrentTotalPrice(countTotalPrice(currentDisplayState))
+    setCurrentTotalPrice(countTotalPrice(currentDisplayState, productsState))
     setDisplayState(currentDisplayState)
   }
 
@@ -78,13 +61,13 @@ const ControlPanel = () => {
         <p className="control-panel__display-total">
           Total:
           {productsState.totalPrice !== 0
-            ? productsState.totalPrice
-            : totalPrice}
+            ? productsState.totalPrice.toFixed(2)
+            : totalPrice.toFixed(2)}
         </p>
         {productsState.totalPrice !== 0 && (
           <p className="control-panel__display-total">
             Introduced:
-            {productsState.introduced}
+            {productsState.introduced.toFixed(2)}
           </p>
         )}
       </div>

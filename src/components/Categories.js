@@ -1,19 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Modal from './Modal'
+import { arrayOfItems } from '../utils/helpers'
 
 const Categories = () => {
   const productsState = useSelector(({ products }) => products)
-
-  const arrayOfItems = (count) => {
-    const array = []
-
-    for (let i = 0; i < count; i++) {
-      array.push(null)
-    }
-
-    return array
-  }
 
   return (
     <>

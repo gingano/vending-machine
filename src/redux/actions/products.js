@@ -17,3 +17,7 @@ export const setIntroduced = (value) => ({
 export const resetProducts = () => ({
   type: 'RESET_PRODUCTS',
 })
+
+export const resetHelpers = () => ({
+  type: 'RESET_HELPERS',
+})
