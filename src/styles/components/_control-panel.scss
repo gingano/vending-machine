@@ -9,6 +9,17 @@
   margin-top: 10px;
   box-sizing: border-box;
 
+  @include width-md {
+    display: flex;
+    align-items: center;
+  }
+
+  @include width-lg {
+    margin-top: 0;
+    width: 48%;
+    flex-direction: column;
+  }
+
   &__display {
     @extend %display;
 
@@ -31,6 +42,10 @@
       height: 100%;
       border-radius: 10px;
       background: linear-gradient(122deg, rgba(229, 250, 255, 0.1) 0%, rgba(215, 242, 255, 0.2) 49%, rgba(198, 230, 255, 0.2) 51%, rgba(174, 241, 255, 0.1) 100%);
+    }
+
+    @include width-md {
+      width: 50%;
     }
   }
 

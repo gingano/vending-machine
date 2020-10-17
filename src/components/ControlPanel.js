@@ -73,63 +73,65 @@ const ControlPanel = () => {
           </p>
         )}
       </div>
-      <ul className="control-panel__categories">
-        {productsState.products.map((category) => (
-          <li
-            key={`control-panel-${category.id}`}
-            className="control-panel__category"
+      <div className="control-panel-controls">
+        <ul className="control-panel__categories">
+          {productsState.products.map((category) => (
+            <li
+              key={`control-panel-${category.id}`}
+              className="control-panel__category"
+            >
+              {category.name}
+              <div className="control-panel__category-buttons">
+                <button
+                  disabled={
+                    displayState[category.name] === 0 ||
+                    productsState.totalPrice !== 0
+                  }
+                  onClick={() => minusProduct(category.name)}
+                  type="button"
+                  className="control-panel__category-button"
+                >
+                  <span className="control-panel__button-text">-</span>
+                </button>
+                <button
+                  disabled={
+                    displayState[category.name] === category.itemsCount ||
+                    productsState.totalPrice !== 0
+                  }
+                  onClick={() => plusProduct(category.name)}
+                  type="button"
+                  className="control-panel__category-button"
+                >
+                  <span className="control-panel__button-text">+</span>
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="control-panel__control-buttons">
+          <button
+            disabled={productsState.totalPrice !== 0}
+            onClick={() => {
+              acceptOrder()
+            }}
+            type="button"
+            className="control-panel__control-button"
           >
-            {category.name}
-            <div className="control-panel__category-buttons">
-              <button
-                disabled={
-                  displayState[category.name] === 0 ||
-                  productsState.totalPrice !== 0
-                }
-                onClick={() => minusProduct(category.name)}
-                type="button"
-                className="control-panel__category-button"
-              >
-                <span className="control-panel__button-text">-</span>
-              </button>
-              <button
-                disabled={
-                  displayState[category.name] === category.itemsCount ||
-                  productsState.totalPrice !== 0
-                }
-                onClick={() => plusProduct(category.name)}
-                type="button"
-                className="control-panel__category-button"
-              >
-                <span className="control-panel__button-text">+</span>
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className="control-panel__control-buttons">
-        <button
-          disabled={productsState.totalPrice !== 0}
-          onClick={() => {
-            acceptOrder()
-          }}
-          type="button"
-          className="control-panel__control-button"
-        >
-          <span className="control-panel__button-text">Accept</span>
-        </button>
-        <button
-          disabled={
-            productsState.totalPrice === 0 || productsState.introduced !== 0
-          }
-          onClick={() => {
-            dispatch(setTotal({}, 0))
-          }}
-          type="button"
-          className="control-panel__control-button"
-        >
-          <span className="control-panel__button-text">Cancel</span>
-        </button>
+            <span className="control-panel__button-text">Accept</span>
+          </button>
+          <button
+            disabled={
+              productsState.totalPrice === 0 || productsState.introduced !== 0
+            }
+            onClick={() => {
+              dispatch(setTotal({}, 0))
+            }}
+            type="button"
+            className="control-panel__control-button"
+          >
+            <span className="control-panel__button-text">Cancel</span>
+          </button>
+        </div>
       </div>
     </div>
   )

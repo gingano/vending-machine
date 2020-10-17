@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setIntroduced } from '../redux/actions/products'
 import useIntroducedAccumulator from '../hooks/useIntroducedAccumulator'
+import useIntroducedAccumulatorReset from '../hooks/useIntroducedAccumulatorReset'
 
 const Money = () => {
   const denominations = [2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
@@ -17,6 +18,8 @@ const Money = () => {
   }
 
   useIntroducedAccumulator(dispatch, introducedAccumulator, setIntroduced)
+
+  useIntroducedAccumulatorReset(productsState, setIntroducedAccumulator)
 
   return (
     <div className="money">

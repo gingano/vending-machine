@@ -17,6 +17,16 @@
     width: 100%;
     outline: none;
     transition: transform 0.2s;
+    cursor: pointer;
+    border: none;
+
+    @include width-md {
+      width: 270px;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
 
     &--small {
       width: 100px;
@@ -31,6 +41,13 @@
 
     &:disabled {
       background: rgb(65, 85, 65);
+      cursor: not-allowed;
+
+      @include width-md {
+        &:hover {
+          transform: none;
+        }
+      }
     }
 
     &:active {
