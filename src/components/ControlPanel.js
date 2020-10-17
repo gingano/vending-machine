@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setTotal } from '../redux/actions/products'
+import { setTotal, resetProducts } from '../redux/actions/products'
 import { countTotalPrice } from '../utils/helpers'
 import useDisplayState from '../hooks/useDisplayState'
 
@@ -130,6 +130,15 @@ const ControlPanel = () => {
             className="control-panel__control-button"
           >
             <span className="control-panel__button-text">Cancel</span>
+          </button>
+          <button
+            onClick={() => {
+              dispatch(resetProducts())
+            }}
+            type="button"
+            className="control-panel__control-button"
+          >
+            <span className="control-panel__button-text">Reset products</span>
           </button>
         </div>
       </div>

@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  setProducts,
-  resetProducts,
-  resetHelpers,
-} from '../redux/actions/products'
+import { setProducts, resetHelpers } from '../redux/actions/products'
 import useResult from '../hooks/useResult'
 import Categories from './Categories'
 import ControlPanel from './ControlPanel'
@@ -39,15 +35,6 @@ const Machine = () => {
 
   return (
     <div className="machine">
-      <button
-        onClick={() => {
-          dispatch(resetProducts())
-        }}
-        type="button"
-        className="machine__reset-button"
-      >
-        reset products
-      </button>
       <Categories />
       <ControlPanel />
       {modalIsOpened && (
