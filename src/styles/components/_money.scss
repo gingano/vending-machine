@@ -1,6 +1,7 @@
 .money {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
   margin-top: 20px;
   padding: 20px;
@@ -12,7 +13,7 @@
     background: rgb(68, 255, 67);
     background: radial-gradient(circle, rgba(68, 255, 67, 1) 0%, rgba(35, 115, 28, 1) 30%, rgba(45, 179, 36, 1) 79%);
     padding: 0;
-    margin-top: 10px;
+    margin-top: 20px;
     height: 100px;
     width: 100%;
     outline: none;
@@ -21,10 +22,19 @@
     border: none;
 
     @include width-md {
-      width: 270px;
+      width: 48%;
+      height: 150px;
 
       &:hover {
         transform: scale(1.05);
+      }
+    }
+
+    &:first-child {
+      margin-top: 0;
+
+      @include width-md {
+        margin-top: 20px;
       }
     }
 
@@ -33,6 +43,10 @@
       border-radius: 100px;
       background: rgb(242, 255, 67);
       background: radial-gradient(circle, rgba(242, 255, 67, 1) 0%, rgba(106, 115, 28, 1) 94%, rgba(115, 126, 29, 1) 94%, rgba(159, 179, 36, 1) 100%);
+
+      @include width-md {
+        height: 100px;
+      }
 
       &:disabled {
         background: rgb(71, 71, 62) !important;
