@@ -1,0 +1,105 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color-black, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: $color-white;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
+  overflow: scroll;
+
+  @include width-md {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 20px 100px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__heading {
+    @extend %title-2;
+
+    text-align: center;
+    margin-top: 70px;
+  }
+
+  &__order-list,
+  &__change-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__order-item {
+    @extend %body-1;
+  }
+
+  &__change-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  &__change-item {
+    @extend %title-2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(68, 255, 67);
+    background: radial-gradient(circle, rgba(68, 255, 67, 1) 0%, rgba(35, 115, 28, 1) 30%, rgba(45, 179, 36, 1) 79%);
+    padding: 0;
+    margin-top: 10px;
+    height: 100px;
+    width: 100%;
+    outline: none;
+    transition: transform 0.2s;
+
+    @include width-md {
+      width: 270px;
+    }
+
+    &--small {
+      width: 100px;
+      border-radius: 100px;
+      background: rgb(242, 255, 67);
+      background: radial-gradient(circle, rgba(242, 255, 67, 1) 0%, rgba(106, 115, 28, 1) 94%, rgba(115, 126, 29, 1) 94%, rgba(159, 179, 36, 1) 100%);
+    }
+  }
+
+  &__close-button {
+    @extend %button;
+
+    position: absolute;
+    align-self: center;
+    font-size: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &:active {
+      top: unset;
+      -webkit-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+      -moz-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+      box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+    }
+  }
+
+  &__button-text {
+    display: block;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+  }
+}

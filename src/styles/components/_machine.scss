@@ -1,0 +1,18 @@
+.machine {
+  display: flex;
+  flex-direction: column;
+  background: $color-green;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+
+  @include width-lg {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__reset-button {
+    display: none;
+  }
+}

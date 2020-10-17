@@ -16,6 +16,14 @@ const Machine = () => {
   const productsState = useSelector(({ products }) => products)
   const dispatch = useDispatch()
 
+  const changeArray = []
+
+  Object.entries(currentChange).forEach(([key, value]) => {
+    for (let i = 0; i < value; i++) {
+      changeArray.push(Number(key))
+    }
+  })
+
   const closeModal = () => {
     dispatch(resetHelpers())
     setModalIsOpened(false)
@@ -44,32 +52,40 @@ const Machine = () => {
       <ControlPanel />
       {modalIsOpened && (
         <Modal>
-          <button
-            onClick={() => {
-              closeModal()
-            }}
-            type="button"
-            className="modal__close-modal"
-          >
-            close
-          </button>
-          <ul className="modal__change-list">
+          <h2 className="modal__heading">Here is your order and change</h2>
+          <ul className="modal__order-list">
             {Object.entries(productsState.totalItems).map(
               ([key, value]) =>
                 value > 0 && (
-                  <li key={`modal-${key}`} className="modal__change-item">
+                  <li key={`modal-${key}`} className="modal__order-item">
                     {`${key} x ${value}`}
                   </li>
                 )
             )}
           </ul>
           <ul className="modal__change-list">
-            {Object.entries(currentChange).map(([key, value]) => (
-              <li key={`modal-${key}`} className="modal__change-item">
-                {`${key} x ${value}`}
-              </li>
-            ))}
+            {changeArray
+              .sort((a, b) => b - a)
+              .map((item) => (
+                <li
+                  key={Math.random()}
+                  className={`modal__change-item modal__change-item--${
+                    item < 1 && 'small'
+                  }`}
+                >
+                  {`${item >= 1 ? '£' : ''}${item >= 1 ? item : item * 100}`}
+                </li>
+              ))}
           </ul>
+          <button
+            onClick={() => {
+              closeModal()
+            }}
+            type="button"
+            className="modal__close-button"
+          >
+            <span className="modal__button-text">close</span>
+          </button>
         </Modal>
       )}
     </div>
