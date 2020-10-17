@@ -3,7 +3,17 @@ export const setProducts = (value) => ({
   value,
 })
 
-export const setTotalPrice = (value) => ({
-  type: 'SET_TOTAL_PRICE',
+export const setTotal = (items, price) => ({
+  type: 'SET_TOTAL',
+  items,
+  price,
+})
+
+export const setIntroduced = (value) => ({
+  type: 'SET_INTRODUCED',
   value,
+})
+
+export const resetProducts = () => ({
+  type: 'RESET_PRODUCTS',
 })

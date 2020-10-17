@@ -36,7 +36,9 @@ const initialState = {
       price: 2.5,
     },
   ],
+  totalItems: {},
   totalPrice: 0,
+  introduced: 0,
 }
 
 export default (state = initialState, action) => {
@@ -47,10 +49,23 @@ export default (state = initialState, action) => {
         products: action.value,
       }
 
-    case 'SET_TOTAL_PRICE':
+    case 'SET_TOTAL':
       return {
         ...state,
-        totalPrice: action.value,
+        totalPrice: action.price,
+        totalItems: action.items,
+      }
+
+    case 'SET_INTRODUCED':
+      return {
+        ...state,
+        introduced: action.value,
+      }
+
+    case 'RESET_PRODUCTS':
+      return {
+        ...state,
+        products: [...initialState.products],
       }
 
     default:

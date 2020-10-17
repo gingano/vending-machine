@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setTotalPrice } from '../redux/actions/products'
+import { setTotal } from '../redux/actions/products'
 
 const ControlPanel = () => {
   const [displayState, setDisplayState] = useState({})
@@ -47,6 +47,17 @@ const ControlPanel = () => {
     setDisplayState(currentDisplayState)
   }
 
+  const acceptOrder = () => {
+    const currentDisplayState = {}
+    productsState.products.forEach((category) => {
+      currentDisplayState[category.name] = 0
+    })
+
+    setCurrentTotalPrice(0)
+    setDisplayState(currentDisplayState)
+    dispatch(setTotal(displayState, totalPrice))
+  }
+
   return (
     <div className="control-panel">
       <div className="control-panel__display">
@@ -64,10 +75,18 @@ const ControlPanel = () => {
         ) : (
           <h2 className="control-panel__display-title">Insert money please</h2>
         )}
-        <span className="control-panel__display-total">
+        <p className="control-panel__display-total">
           Total:
-          {totalPrice}
-        </span>
+          {productsState.totalPrice !== 0
+            ? productsState.totalPrice
+            : totalPrice}
+        </p>
+        {productsState.totalPrice !== 0 && (
+          <p className="control-panel__display-total">
+            Introduced:
+            {productsState.introduced}
+          </p>
+        )}
       </div>
       <ul className="control-panel__cetegories">
         {productsState.products.map((category) => (
@@ -114,7 +133,7 @@ const ControlPanel = () => {
       <button
         disabled={productsState.totalPrice !== 0}
         onClick={() => {
-          dispatch(setTotalPrice(totalPrice))
+          acceptOrder()
         }}
         type="button"
         className={`control-panel__accept-button control-panel__accept-button--${
@@ -124,13 +143,16 @@ const ControlPanel = () => {
         Accept
       </button>
       <button
-        disabled={productsState.totalPrice === 0}
+        disabled={
+          productsState.totalPrice === 0 || productsState.introduced !== 0
+        }
         onClick={() => {
-          dispatch(setTotalPrice(0))
+          dispatch(setTotal({}, 0))
         }}
         type="button"
         className={`control-panel__cancel-button control-panel__cancel-button--${
-          productsState.totalPrice === 0 && 'disabled'
+          (productsState.totalPrice === 0 || productsState.introduced !== 0) &&
+          'disabled'
         }`}
       >
         Cancel
