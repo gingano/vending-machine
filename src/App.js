@@ -5,10 +5,13 @@ import './styles/main.scss'
 
 function App() {
   return (
-    <div className="container">
-      <Machine />
-      <Money />
-    </div>
+    <>
+      <div className="app-background" />
+      <div className="container">
+        <Machine />
+        <Money />
+      </div>
+    </>
   )
 }
 
